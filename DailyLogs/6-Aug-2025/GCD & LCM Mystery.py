@@ -1,0 +1,24 @@
+# Euclidean algorithm (for GCD amd LCM)
+
+try:
+    num1 = int(input("Pick first number: "))
+    num2 = int(input("Pick 2nd number: "))
+except ValueError:
+    print("Write any positive integer number. ") # warning messages for users to put the right input
+    exit()
+
+def gcd(a,b):
+    while True:             #keep running the loop till a % b == 0
+        a , b = b, a % b     # a = b  and b = a % b Euclidean methods
+        if a % b == 0:       # if the reminder is 0 then the divisor is the GCD
+            return a
+
+def lcm(a,b):
+    return ((a * b)// gcd(a,b))     # will return lcm in euclidean methods
+    
+def main():
+    print(f"The GCD of {num1} and {num2} is {gcd(num1, num2)}")
+    print(f"The LCM of {num1} and {num2} is {lcm(num1, num2)}")
+
+if __name__ == "__main__":
+    main()
