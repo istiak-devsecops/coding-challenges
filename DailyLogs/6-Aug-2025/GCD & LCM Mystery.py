@@ -8,10 +8,9 @@ except ValueError:
     exit()
 
 def gcd(a,b):
-    while True:             #keep running the loop till a % b == 0
+    while b != 0:             #keep running the loop till a % b == 0
         a , b = b, a % b     # a = b  and b = a % b Euclidean methods
-        if a % b == 0:       # if the reminder is 0 then the divisor is the GCD
-            return a
+    return a
 
 def lcm(a,b):
     return ((a * b)// gcd(a,b))     # will return lcm in euclidean methods
