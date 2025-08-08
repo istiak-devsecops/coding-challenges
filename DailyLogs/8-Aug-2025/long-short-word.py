@@ -2,14 +2,14 @@
 
 import string
 
-user_input = input("Write a sentence here: ").split() #split the string
+user_input = input("Write a sentence here: ").split()  # split the string
 
-word_list = [ ] 
+word_list = []
 
 for word in user_input:
-    clean_word = word.strip().lower().strip(string.punctuation) #remove punctuation
+    clean_word = word.strip().lower().strip(string.punctuation)  # remove punctuation
     if clean_word:
-        word_list.append(clean_word) #added word to the list
+        word_list.append(clean_word)  # added word to the list
 
 Longest_word = max(word_list, key=len)
 shortest_word = min(word_list, key=len)
