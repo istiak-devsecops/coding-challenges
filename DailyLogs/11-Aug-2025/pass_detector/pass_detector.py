@@ -24,5 +24,5 @@ for username, password in clean_content:
 
 print("weak passwords found for: ")
 for user in weak_user:
-    print(weak_user)
+    print(user)
 
