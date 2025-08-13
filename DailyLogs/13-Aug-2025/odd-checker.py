@@ -7,14 +7,22 @@ def EvenOddChecker(num):        #define a function to check even and odd
         print(f"{num} is a odd number.")
 
             
-try:                            #added value error
-    while True:                    
+                          
+while True:      
+    try:           
         user_input = int(input("Put any number to know its even or odd: "))
         EvenOddChecker(user_input)
-        user_opinion = input("You wants to continue or break Type 'y/n'.")
-        if user_opinion == "y":
-            print("Thanks for running the program.")
-        elif user_opinion == "n":
-            break
-except ValueError:
-    print("Please type 'y/n' in lower case to proceed")
+    except ValueError:
+        print("Hey Put a valid integer. ") #value error added
+        continue
+
+    user_opinion = input("if you wants to exit type 'end' and continue type 'start': ").lower()
+    
+    if user_opinion == "start":         # user opinion to continue or terminate
+        continue
+    elif user_opinion == "end":
+        print("Thanks for running the program.")
+        break
+    
+
+    
