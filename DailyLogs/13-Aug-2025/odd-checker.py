@@ -1,6 +1,5 @@
 
 def EvenOddChecker(num):        #define a function to check even and odd
-    num != 0
     if num % 2 == 0:
         print(f"{num} is a even number.")
     else:
