@@ -1,28 +1,28 @@
 #check for week password from a log file
 
 with open("log.txt", "r") as file:
-    content = file.readlines()   #read file line by line
+    content = file.readlines()
 
-clean_content = []
+cleancontent = []
 
 for word in content:
-    clean_content.append(word.strip().split(":")) # add content to the list
+    cleancontent.append(word.strip().split(":"))
 
-weak_user = []
+strong_user = []
 
-for username, password in clean_content:
-    if len(password) < 8:                       #check if the password is below 8 char
-        weak_user.append(username)
+for username, password in cleancontent:
+    if len(password) > 8: 
+        strong_user.append(username)
         continue
 
-    has_upper = any(ch.isupper() for ch in password) 
-    has_lower = any(ch.islower() for ch in password)
-    has_digit = any(ch.isdigit() for ch in password)
-    
-    if not (has_upper and has_lower and has_digit): #check password contain lowercase, digit, uppercase
-        weak_user.append(username)
+    has_upper = any(chr.isupper() for chr in password)
+    has_lower = any(chr.islower() for chr in password)
+    has_digit = any(chr.isdigit() for chr in password)
 
-print("weak passwords found for: ")
-for user in weak_user:
+    if not (has_digit and has_lower and has_upper):
+        strong_user.append(username)
+
+print("strong password found for: ")
+for user in strong_user:
     print(user)
 
