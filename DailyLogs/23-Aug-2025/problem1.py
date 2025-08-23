@@ -7,8 +7,8 @@ import string
 clean_word_list = []
 #Remove punctuation and space from the list.
 for word in user_input:
-    word = word.strip(string.punctuation)
-    if word and not word.isspace():
+    word = word.strip(string.punctuation).strip()
+    if word:
         clean_word_list.append(word)
 
 #use set to remove duplicates to find unique words
