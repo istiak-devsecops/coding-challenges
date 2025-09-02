@@ -92,6 +92,20 @@ while True:
 
         print(f"Top 5 common words are: {top_5_common_word}")
 
+    elif choice == "5":
+
+        vowels = "aeiou"
+        vowel_counter = 0
+        consonant_counter = 0
+
+        #vowels and consonent count
+        for word in words:
+            for char in word:
+                if char in vowels:
+                    vowel_counter += 1
+                else:
+                    consonant_counter += 1
+        print(f"Total vowels in the sentences are: {vowel_counter} \nToal consonant in the sentences are {consonant_counter}")
 
 
     break
