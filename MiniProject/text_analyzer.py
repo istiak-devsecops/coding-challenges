@@ -1,9 +1,11 @@
 # Text analyzer
+
+import re
+import string
 user_input = input("write few words here: ")
 words = []
 
 # Remove punctuation from the sentence for accurate counts
-import string
 for word in user_input.lower().split():
     clean_word = ""
     for char in word:
@@ -15,7 +17,7 @@ clean_sentence = " ".join(words)
 
 # Selection menu for user
 while True:
-    print("Select which operations you wants to perform!: ")
+    print("Select which operations you wants to perform!")
     print("1. Count characters, words, sentences")
     print("2. Word frequency")
     print("3. Longest/shortest word")
@@ -23,9 +25,8 @@ while True:
     print("5. Vowel & consonant count")
     print("6. Exit")
 
-    choice = input("Select an option from the list by their number.")
+    choice = input("Select an option from the list by their number: ")
 
-    import re
     if choice == "1":
         char_count = 0
 
@@ -101,10 +102,11 @@ while True:
         #vowels and consonent count
         for word in words:
             for char in word:
-                if char in vowels:
-                    vowel_counter += 1
-                else:
-                    consonant_counter += 1
+                if char.isalpha():
+                    if char in vowels:
+                        vowel_counter += 1
+                    else:
+                        consonant_counter += 1
         print(f"Total vowels in the sentences are: {vowel_counter} \nToal consonant in the sentences are {consonant_counter}")
 
     #break the loop 
