@@ -107,5 +107,10 @@ while True:
                     consonant_counter += 1
         print(f"Total vowels in the sentences are: {vowel_counter} \nToal consonant in the sentences are {consonant_counter}")
 
+    #break the loop 
+    elif choice == "6":
+        print(f"Thank you for using the service!")
+        break
 
-    break
+    else:
+        print("Your choice is invalid. Try again...")
