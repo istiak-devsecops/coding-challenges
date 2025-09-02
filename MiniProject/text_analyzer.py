@@ -44,7 +44,7 @@ while True:
         matches = re.findall(search_pattern,user_input)
         print(f"Total number of sentences is: {len(matches)}")    
 
-    if choice == "2":
+    elif choice == "2":
         word_frequency = {}
 
         #word frequency counter
@@ -55,6 +55,35 @@ while True:
                 word_frequency[word] = 1
         
         print(f"Word frequency is: {word_frequency}")
+    
+    elif choice == "3":
+
+        longest_word = []
+        shortest_word = []
+        max_len = 0
+        min_len = float("inf")
+
+        for word in words:
+            word_len = len(word)
+        
+        #Longest word
+        if word_len > max_len:
+            max_len = word_len
+            longest_word.append(word)
+
+        elif word_len == max_len:
+            longest_word.append(word)
+
+        #short word
+        if word_len < min_len:
+            min_len = word_len
+            shortest_word.append(word)
+        elif word_len == min_len:
+            shortest_word.append(word)
+        
+        print(f"The longest words are: {longest_word} and the shortest words are: {shortest_word}")
+            
+
 
 
     break
