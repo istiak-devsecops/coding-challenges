@@ -66,23 +66,31 @@ while True:
         for word in words:
             word_len = len(word)
         
-        #Longest word
-        if word_len > max_len:
-            max_len = word_len
-            longest_word.append(word)
+            #Longest word
+            if word_len > max_len:
+                max_len = word_len
+                longest_word.append(word)
 
-        elif word_len == max_len:
-            longest_word.append(word)
+            elif word_len == max_len:
+                longest_word.append(word)
 
-        #short word
-        if word_len < min_len:
-            min_len = word_len
-            shortest_word.append(word)
-        elif word_len == min_len:
-            shortest_word.append(word)
+            #short word
+            if word_len < min_len:
+                min_len = word_len
+                shortest_word.append(word)
+            elif word_len == min_len:
+                shortest_word.append(word)
         
         print(f"The longest words are: {longest_word} and the shortest words are: {shortest_word}")
             
+    elif choice == "4":
+
+        # Top 5 common word
+        from collections import Counter
+        word_freq = Counter(clean_sentence)
+        top_5_common_word = word_freq.most_common(5)
+
+        print(f"Top 5 common words are: {top_5_common_word}")
 
 
 
