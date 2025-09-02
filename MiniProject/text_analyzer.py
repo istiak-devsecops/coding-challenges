@@ -11,11 +11,11 @@ for word in user_input.lower().split():
             clean_word += char
     words.append(clean_word)
 
-clean_sentence = " ".join(clean_text)
+clean_sentence = " ".join(words)
 
 # Selection menu for user
 while True:
-    print("Select which operations you wants to perform!")
+    print("Select which operations you wants to perform!: ")
     print("1. Count characters, words, sentences")
     print("2. Word frequency")
     print("3. Longest/shortest word")
@@ -69,15 +69,14 @@ while True:
             #Longest word
             if word_len > max_len:
                 max_len = word_len
-                longest_word.append(word)
-
+                longest_word = [word]
             elif word_len == max_len:
                 longest_word.append(word)
 
             #short word
             if word_len < min_len:
                 min_len = word_len
-                shortest_word.append(word)
+                shortest_word = [word]
             elif word_len == min_len:
                 shortest_word.append(word)
         
@@ -87,7 +86,7 @@ while True:
 
         # Top 5 common word
         from collections import Counter
-        word_freq = Counter(clean_sentence)
+        word_freq = Counter(words)
         top_5_common_word = word_freq.most_common(5)
 
         print(f"Top 5 common words are: {top_5_common_word}")
