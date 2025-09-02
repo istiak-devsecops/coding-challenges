@@ -40,9 +40,9 @@ while True:
         print(f"Total word count is: {word_count}")
 
         #Count sentence
-        search_pattern = r'[.?!](?=\s|$)'    
-        matches = re.findall(search_pattern,user_input)
-        print(f"Total number of sentences is: {len(matches)}")    
+        sentences = re.split(r'[.?!]', user_input)
+        sentences = [s.strip() for s in sentences if s.strip()]
+        print(f"Total number of sentences is: {len(sentences)}")   
 
     elif choice == "2":
         word_frequency = {}
@@ -53,8 +53,9 @@ while True:
                 word_frequency[word] += 1
             else:
                 word_frequency[word] = 1
-        
-        print(f"Word frequency is: {word_frequency}")
+        #better formatting
+        for word, count in word_frequency.items():
+            print(f"{word}: {count}")
     
     elif choice == "3":
 
