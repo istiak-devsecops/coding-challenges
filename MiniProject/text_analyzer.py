@@ -44,6 +44,17 @@ while True:
         matches = re.findall(search_pattern,user_input)
         print(f"Total number of sentences is: {len(matches)}")    
 
+    if choice == "2":
+        word_frequency = {}
+
+        #word frequency counter
+        for word in words:
+            if word in word_frequency:
+                word_frequency[word] += 1
+            else:
+                word_frequency[word] = 1
+        
+        print(f"Word frequency is: {word_frequency}")
 
 
     break
