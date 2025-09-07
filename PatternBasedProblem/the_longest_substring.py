@@ -3,6 +3,7 @@
 s = "abcabcbb"
 start = 0
 max_length = 0
+longest_substring = ""
 seen = {}
 
 for end in range(len(s)): # end is the index number 
@@ -15,8 +16,11 @@ for end in range(len(s)): # end is the index number
     # update the char value in the seen dict to a current end index number
     seen[char] = end 
 
-    # from the previous max_length value and the current (end - start + 1) value we are updating the value again with the largest one
-    max_length = max(max_length, end - start + 1) 
+     
+    window_length = end - start + 1
 
-
-print(f"The longest substring without repeating characters: {max_length}")
+    if window_length > max_length:
+        max_length = window_length
+        longest_substring = s[start:end + 1]
+     
+print(f"The longest substring without repeating characters: {longest_substring}: {max_length}")
