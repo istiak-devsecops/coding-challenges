@@ -7,7 +7,7 @@ stop = len(nums) - 1
 while start < stop:
     sums = nums[start] + nums[stop]
     if sums == target:
-        print("Target found!")
+        print(f"The pair is {nums[start]},{nums[stop]} \nThe target is {target}")
         break
     elif sums > target:
         stop -= 1
