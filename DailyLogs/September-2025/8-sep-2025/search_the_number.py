@@ -7,7 +7,7 @@ end = len(nums) - 1
 not_found = True
 
 
-while start < end:
+while start <= end:
     mid = (start + end) // 2
     if nums[mid] > target:
         end = mid - 1           #Move the left one slot left
