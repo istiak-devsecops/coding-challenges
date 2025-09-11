@@ -1,5 +1,8 @@
 # Write a function that accepts any number of numbers (*args) and returns the largest one.
 
+def find_largest_num(*args):
+    return max(args)
+
 num1 = []
 num2 = []
 num3 = []
@@ -29,3 +32,6 @@ while True:
         break
 
 print(f"Num1: {num1}\nNum2: {num2}\nNum3: {num3}")
+
+all_number_list = num1 + num2 + num3 
+print(f"The largest number from the list is: {find_largest_num(*all_number_list)}")
