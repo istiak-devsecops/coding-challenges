@@ -12,8 +12,13 @@ while True:
 
     if user_input.lower() == "break":
         break
-
-    number = int(user_input)
+    
+    try:
+        number = int(user_input)
+    except ValueError:
+        print("Write a valid positive number.")
+        continue
+    
     if current_list < len(lists):
         if len(lists[current_list]) < 3:
             lists[current_list].append(number)
