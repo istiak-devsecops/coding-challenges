@@ -10,10 +10,7 @@ def word_counter():
         words = U_input.strip().split()
         for word in words:
             word = word.lower()
-            if word in note_book:
-                note_book[word] += 1
-            else:
-                note_book[word] = 1
+            note_book[word] = note_book.get(word, 0) + 1
 
     return note_book
 
