@@ -1,5 +1,7 @@
 # Write a function that takes a string and returns a dictionary with each word and how many times it appears.
 
+import string
+
 def word_counter():
     note_book = {}
     while True:
@@ -9,8 +11,9 @@ def word_counter():
         
         words = U_input.strip().split()
         for word in words:
-            word = word.lower()
-            note_book[word] = note_book.get(word, 0) + 1
+            clean_word = "".join(char for char in word if char not in string.punctuation).lower()
+            if clean_word:
+                note_book[clean_word] = note_book.get(clean_word, 0) + 1
 
     return note_book
 
