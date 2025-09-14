@@ -16,18 +16,29 @@ def prime_checker(start,end):
 
 
 while True:
-    #validing the range
-    start = int(input("Write the first number: "))
-    end = int(input("Write the 2nd number: "))
-    if start > end:
-        print("range should be in acending order(from low to high). Try again!")
-    else:
+    try:
+        #validing the range
+        start = int(input("Write the first number: "))
+        end = int(input("Write the 2nd number: "))
+        
+        #waring message in case the number is negative
+        if start < 0 or end < 0:
+            print("Enter a valid positive number!")
+            continue
+
+        #starting should be lower than end
+        if start > end:
+            print("range should be in acending order(from low to high). Try again!")
+            continue
+
+        
         primes = prime_checker(start,end)
         print(f"The primes between {start} and {end} are: {primes}")
         user_input = input("You wants to continue or stop?Type 'y/n': ")
         if user_input.lower() == "n":
             break
-        else:
-            continue
+        
+    except ValueError:
+        print("Add a valid positive number!")
 
 
