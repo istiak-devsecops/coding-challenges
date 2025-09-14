@@ -12,5 +12,8 @@ def prime_checker(start,end):
 
     return prime_list
 
-primes = prime_checker(3,87)
-print(primes)
+start = int(input("Write the first number: "))
+end = int(input("Write the 2nd number: "))
+
+primes = prime_checker(start,end)
+print(f"The primes between {start} and {end} are: {primes}")
