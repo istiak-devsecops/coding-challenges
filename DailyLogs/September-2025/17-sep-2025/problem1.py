@@ -7,4 +7,4 @@ counts = defaultdict(int)
 for word in text.split():
     counts[word] += 1
 
-print(counts)
+print(dict(counts))
