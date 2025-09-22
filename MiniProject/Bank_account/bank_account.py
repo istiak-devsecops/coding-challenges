@@ -4,14 +4,15 @@
 # - Add logic to prevent overdrawing
 
 class BankAccount:
-    def __init__(self, balance, owner):
-        self.balance = balance
+    def __init__(self, owner, balance):
         self.owner = owner
-
+        self.balance = balance
+        
     def deposit(self, amount):
         if amount > 0:
             self.balance += amount
             print(f"Deposited amount {amount} tk")
+            self.transaction_log("deposit", amount)
         else:
             print("Deposit amount must be positive.")
     
@@ -23,6 +24,7 @@ class BankAccount:
         else:
             self.balance -= amount
             print(f"Your withdraw of {amount}tk has been initiated.")
+            self.transaction_log("withdraw", amount)
     
     def check_balance(self):
         print(f"\nCurrent balance is {self.balance}tk")
@@ -30,12 +32,19 @@ class BankAccount:
     def __str__(self):
         return f"{self.owner} has a balance of {self.balance}tk"
 
+    def transaction_log(self, action, amount, filename="data.txt"):
+        with open(filename, "a") as file:
+            file.write(f"Owner: {self.owner}\n")
+            file.write(f"Action: {action}\n")
+            file.write(f"Amount: {amount}\n")
+            file.write(f"Balance: {self.balance}\n")
+            file.write("\n")  # Add newline for better redability
 
 # user interaction
 
 owner_name = input("What is your name: ")
 initial_balance = float(input("What is your current account balance: "))
-account = BankAccount(initial_balance, owner_name)
+account = BankAccount(owner_name, initial_balance)
 
 while True:
     print("\nchooose any option from the list: ")
@@ -44,7 +53,7 @@ while True:
     print("3. Check Balance")
     print("4. Exit")
 
-    choice = input("Choose an option from (1-4): ")
+    choice = input("Choose an option from (1-4): ")  # user choose what to do with the program
 
     if choice == "1":
         amount = float(input("\nHow much you wants to deposit: "))
@@ -59,3 +68,5 @@ while True:
         break
     else:
         print("\nInvalid choice. Choose (1-4)")
+
+    
