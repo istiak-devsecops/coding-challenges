@@ -25,11 +25,37 @@ class BankAccount:
             print(f"Your withdraw of {amount}tk has been initiated.")
     
     def check_balance(self):
-        print(f"Current balance is {self.balance}tk")
+        print(f"\nCurrent balance is {self.balance}tk")
 
     def __str__(self):
         return f"{self.owner} has a balance of {self.balance}tk"
 
 
-account1 = BankAccount(1000, "istiak")
-print(account1)
+# user interaction
+
+owner_name = input("What is your name: ")
+initial_balance = float(input("What is your current account balance: "))
+account = BankAccount(initial_balance, owner_name)
+
+while True:
+    print("\nchooose any option from the list: ")
+    print("1. Deposit")
+    print("2. Withdraw")
+    print("3. Check Balance")
+    print("4. Exit")
+
+    choice = input("Choose an option from (1-4): ")
+
+    if choice == "1":
+        amount = float(input("\nHow much you wants to deposit: "))
+        account.deposit(amount)
+    elif choice == "2":
+        amount = float(input("\nHow much do you wants to withdraw: "))
+        account.withdraw(amount)
+    elif choice == "3":
+        account.check_balance()
+    elif choice == "4":
+        print("\nThank you for using our service!")
+        break
+    else:
+        print("\nInvalid choice. Choose (1-4)")
