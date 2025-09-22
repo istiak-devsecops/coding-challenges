@@ -8,3 +8,48 @@ Action: withdraw
 Amount: 3435.0
 Balance: 3886.0
 
+Owner: shoaib
+Action: deposit
+Amount: 232432.0
+Balance: 732432.0
+
+Owner: shoaib
+Action: withdraw
+Amount: 3442.0
+Balance: 728990.0
+
+Owner: shoaib
+Action: Check Balance
+Amount: 728990.0
+Balance: 728990.0
+
+Owner: istiak
+Action: deposit
+Amount: 500.0
+Balance: 5000.0
+
+Owner: istiak
+Action: withdraw
+Amount: 1300.0
+Balance: 3700.0
+
+Owner: istiak
+Action: Check Balance
+Amount: 3700.0
+Balance: 3700.0
+
+Owner: shoaib
+Action: deposit
+Amount: 55675.0
+Balance: 100675.0
+
+Owner: shoaib
+Action: withdraw
+Amount: 343.0
+Balance: 100332.0
+
+Owner: shoaib
+Action: Check Balance
+Amount: 100332.0
+Balance: 100332.0
+

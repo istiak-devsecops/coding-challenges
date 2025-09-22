@@ -3,16 +3,16 @@
 # - Methods: deposit(), withdraw(), check_balance()
 # - Add logic to prevent overdrawing
 
-class BankAccount:
+class BankAccount:                           # Define class
     def __init__(self, owner, balance):
         self.owner = owner
         self.balance = balance
         
-    def deposit(self, amount):
+    def deposit(self, amount):               # Define amount to compare with main balance
         if amount > 0:
-            self.balance += amount
+            self.balance += amount           #Deposit amounts will be added to the main balance
             print(f"Deposited amount {amount} tk")
-            self.transaction_log("deposit", amount)
+            self.transaction_log("deposit", amount)  #save transaction data into a log file
         else:
             print("Deposit amount must be positive.")
     
@@ -22,17 +22,18 @@ class BankAccount:
         elif amount <= 0:
             print("withdraw amount must be more than 1tk")
         else:
-            self.balance -= amount
+            self.balance -= amount                   # Deduct withdraw from the main balance
             print(f"Your withdraw of {amount}tk has been initiated.")
-            self.transaction_log("withdraw", amount)
+            self.transaction_log("withdraw", amount)            
     
     def check_balance(self):
         print(f"\nCurrent balance is {self.balance}tk")
+        self.transaction_log("Check Balance", self.balance)
 
     def __str__(self):
         return f"{self.owner} has a balance of {self.balance}tk"
 
-    def transaction_log(self, action, amount, filename="data.txt"):
+    def transaction_log(self, action, amount, filename="data.txt"):     # action is defined in self.transaction_log("action string", amount_int)
         with open(filename, "a") as file:
             file.write(f"Owner: {self.owner}\n")
             file.write(f"Action: {action}\n")
@@ -64,7 +65,8 @@ while True:
     elif choice == "3":
         account.check_balance()
     elif choice == "4":
-        print("\nThank you for using our service!")
+        print(f"\n{account}")
+        print("Thank you for using our service!")
         break
     else:
         print("\nInvalid choice. Choose (1-4)")
