@@ -37,7 +37,7 @@ class Book:
         self.log_to_file("Displayed Info")
     
     def log_to_file(self, action, filename="library_log.txt"):
-        with open(filename, "a") as file:
+        with open(filename, "w") as file:
             file.write(f"Action: {action}\n")
             file.write(f"Title: {self.title}\n")
             file.write(f"Author: {self.author}\n")
