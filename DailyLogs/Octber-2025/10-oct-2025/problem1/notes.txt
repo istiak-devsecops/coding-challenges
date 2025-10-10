@@ -1,0 +1,4 @@
+Similar to always, but if you manually stop the container, Docker won’t start it again automatically—even after reboot.
+
+Use when:
+You want persistent uptime unless you intentionally stop it. Great for dev environments or self-hosted apps.
