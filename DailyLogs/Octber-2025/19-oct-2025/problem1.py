@@ -14,3 +14,9 @@ def timer(func):
         print(f"Function '{func.__name__}' took {duration:.4f} seconds.")
         return result
     return wrapper
+
+@timer
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("whoami")
