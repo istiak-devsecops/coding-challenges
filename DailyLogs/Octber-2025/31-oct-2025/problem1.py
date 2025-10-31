@@ -18,3 +18,8 @@ def sqr_root(nums):
 
 new_list2 = list(map(sqr_root,list_num))
 print(new_list2)
+
+# using list comprehention
+
+new_list3 = [num**2 for num in list_num]
+print(new_list3)
