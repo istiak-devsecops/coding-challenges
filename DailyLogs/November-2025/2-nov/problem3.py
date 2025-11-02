@@ -12,7 +12,17 @@ class Car:
     
     def stop(self):
         return f"{self.color} {self.model} with {self.horse_power}hp engine has been stopped."
+    
 
-car1 = Car("red", "BMW", 18, 500)
-print(car1.drive())
-print(car1.stop())
+class Road:
+    def __init__(self, road_type, road_len, color, model, wheel_size, horse_power):
+        self.road_type = road_type
+        self.road_len = road_len
+        self.car_obj = Car(color, model, wheel_size, horse_power)
+
+    def road_open(self):
+        return f"In the {self.road_type} raod in {self.road_len}len a {self.car_obj.drive()}"
+        
+
+car1 = Road("Highway", "6", "red", "BMW", 18, 500)
+print(car1.road_open())
