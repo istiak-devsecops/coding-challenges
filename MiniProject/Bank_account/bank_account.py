@@ -12,8 +12,8 @@ class Logger:
             file.write(f"Amount: {amount}\n")
             file.write(f"Balance: {balance}\n\n")
 
-class BankAccount:
-    def __init__(self, owner, balance, logger):
+class BankAccount: 
+    def __init__(self, owner, balance, logger): # constructor
         self.owner = owner
         self.balance = balance
         self.logger = logger
@@ -22,7 +22,7 @@ class BankAccount:
         if amount > 0:
             self.balance += amount
             print(f"Deposited {amount} tk")
-            self.logger.log(self.owner, "deposit", amount, self.balance)
+            self.logger.log(self.owner, "deposited", amount, self.balance)
         else:
             print("Deposit amount must be positive.")
     
