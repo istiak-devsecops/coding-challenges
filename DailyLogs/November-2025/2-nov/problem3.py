@@ -13,6 +13,10 @@ class Car:
     def stop(self):
         return f"{self.color} {self.model} with {self.horse_power}hp engine has been stopped."
     
+class Engine(Car):
+    def __init__(self, color, model, wheel_size, horse_power):
+        super().__init__(color, model, wheel_size, horse_power)
+    
 
 class Road:
     def __init__(self, road_type, road_len, color, model, wheel_size, horse_power):
