@@ -11,15 +11,15 @@ class Animal:
 
 class Dog(Animal):
     def sound(self):
-        print("Woof!")
+        return "Woof!"
 
 class Cat(Animal):
     def sound(self):
-        print("Meow!")
+        return "Meow!"
 
 class Mouse(Animal):
     def sound(self):
-        print("Sques!")
+        return "Sques!"
 
 
 dog1 = Dog("scoobyDo", "grey")
