@@ -18,6 +18,12 @@ def main():
         print(f"Removing dangling image: {img.short_id}")
         client.images.remove(img.id)
 
+    #remove unused networks
+    networks = client.networks.list()
+    for net in networks:
+        if net.name not in ["bridge", "host", "none"]:
+            print(f"removing network: {net.name}")
+            net.remove()
 
 if __name__ == "__main__":
     main()
