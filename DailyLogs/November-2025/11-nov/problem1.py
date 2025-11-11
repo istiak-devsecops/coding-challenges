@@ -25,5 +25,13 @@ def main():
             print(f"removing network: {net.name}")
             net.remove()
 
+    #removed unused volumes
+    volumes = client.volumes.list(filters={"dangling": True})
+    for vol in volumes:
+        print(f"removing unused volume: {vol.name}")
+        vol.remove()
+
+    print("cleanup complete!")
+
 if __name__ == "__main__":
     main()
