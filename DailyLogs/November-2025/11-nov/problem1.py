@@ -12,6 +12,12 @@ def main():
         print(f"Removing container: {cont.name}")
         cont.remove()
 
+    #remove unused images
+    images = client.images.list(filters={"dangling": True})
+    for img in images:
+        print(f"Removing dangling image: {img.short_id}")
+        client.images.remove(img.id)
+
 
 if __name__ == "__main__":
     main()
