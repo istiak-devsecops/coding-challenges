@@ -1,5 +1,7 @@
 # check if a file is readable and writable
 
+#!/bin/bash
+
 FILE="/home/bash_script.sh"
 
 # check if its readable
