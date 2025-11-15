@@ -1,0 +1,5 @@
+TEXT="Contact: alice@example.com
+Invalid: justtext@com
+Support: support@devsecops.io
+Note: admin@localhost
+Marketing: team@company.org"
