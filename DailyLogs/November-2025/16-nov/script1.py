@@ -1,3 +1,5 @@
+# create a directory from command line argument
+
 import os
 import sys
 
