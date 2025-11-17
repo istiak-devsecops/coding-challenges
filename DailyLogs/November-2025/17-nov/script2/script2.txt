@@ -1,2 +1,4 @@
 # script 2 pseudocode
 
+Check if a File Exists (from CLI)
+
