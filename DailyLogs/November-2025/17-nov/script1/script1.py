@@ -5,8 +5,9 @@ import sys
 
 # check if there are not 3 arguments then put an expected input type
 if len(sys.argv) != 3:
+    print(f"Invalid arguments!")
     print(f"Usage: python3 script.py <file name> <--count-lines | --count-words>")
-    sys.exit(1)
+    sys.exit(2)  # exit code 2 for invalid arguments
 
 
 file_path = sys.argv[1]     # 2nd arguments
@@ -32,13 +33,15 @@ def count_words(filepath):
 # check if the file exist
 if not os.path.isfile(file_path):
     print(f"{file_path} does not exist.")
-    sys.exit(1)
+    sys.exit(1) # exit code 1 for missing file
 
 # verify the flag and run the correct function
 if flags == "--count-lines":
     print(f"Total lines: {count_lines(file_path)}")
+    sys.exit(0) # exit code 0 for success
 elif flags == "--count-words":
     print(f"Total words: {count_words(file_path)}")
+    sys.exit(0) # exit code 0 for success
 else:
     print(f"ERROR: unknown flag. Only use '--count-lines' or '--count-words'")
-    sys.exit(1)
+    sys.exit(2) # exit code 2 for invalid arguments
