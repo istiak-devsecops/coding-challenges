@@ -12,3 +12,5 @@ for root(current dir), files(files in that dir), dirs(sub dir) in os.walk(path):
 # Print Script’s Own Location and Parent Directory
 
 script_path = os.path.abspath(sys.argv[0])
+print script path
+print script dir name
