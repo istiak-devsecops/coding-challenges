@@ -1,4 +1,5 @@
 import sys
+import os
 
 if len(sys.argv) < 2:
     print(f"Usage: python3 script.py <filename>")
@@ -14,3 +15,9 @@ try:
 except FileNotFoundError as e:
     print(f"{e} is missing.")
     sys.exit(1) # file missing
+
+
+print("Python file list in the directory: ")
+for file in os.listdir():
+    if file.endswith(".py"):
+        print("-",file)

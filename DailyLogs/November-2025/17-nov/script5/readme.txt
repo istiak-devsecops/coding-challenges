@@ -12,3 +12,11 @@ try:
         print(number of line is len(lines))
 except FileNotFoundError as e:
     print("{e} not found")
+
+# Print All Python Files in Current Directory
+
+import module
+
+for file in os.listdir():
+    if file.endswith(".py"):
+        print(f"-{file}")
