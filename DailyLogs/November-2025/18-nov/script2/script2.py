@@ -7,12 +7,18 @@ if len(sys.argv) < 2:
     sys.exit(2) # invalid arguments
 
 file_pattern = sys.argv[1]
-regex = re.compile(file_pattern)
+
+try:
+    regex = re.compile(file_pattern)
+except re.error:
+    print("Invalid regex pattern!")
+    sys.exit(1) # missing arguments
+
 files = os.listdir()
 mathed_file = []
 
 for file in files:
-    if os.path.isfile(file) and regex.match(file):
+    if os.path.isfile(file) and regex.search(file):
         mathed_file.append(file)
         
 if mathed_file:
