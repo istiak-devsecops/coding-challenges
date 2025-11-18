@@ -9,9 +9,15 @@ if len(sys.argv) < 2:
 file_pattern = sys.argv[1]
 regex = re.compile(file_pattern)
 files = os.listdir()
+mathed_file = []
 
 for file in files:
     if os.path.isfile(file) and regex.match(file):
-        print(f"Files been found: {file}.")
-    else:
-        print("No matching file found!")
+        mathed_file.append(file)
+        
+if mathed_file:
+    print("Matching files: ")
+    for f in mathed_file:
+        print(f)
+else:
+    print("No matchng file found!")
