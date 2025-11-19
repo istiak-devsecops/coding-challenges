@@ -2,6 +2,11 @@ import os
 import sys
 import datetime
 
+if len(sys.argv) < 2:
+    print("Usage: python script.py <filename>")
+    sys.exit(1)
+
+
 file_name = sys.argv[1]
 
 if os.path.exists(file_name) and os.path.isfile(file_name):
