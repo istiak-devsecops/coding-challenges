@@ -8,7 +8,7 @@ if len(sys.argv) < 2:
     sys.exit(2) # Invalid arguments
 
 dir_path = sys.argv[1]  # directory name from cli
-days = sys.argv[2]  # number of days from cli
+days = int(sys.argv[2])  # number of days from cli
 
 time_difference = datetime.now() - timedelta(days=days) # file aged that needs to be removed
 
@@ -18,7 +18,7 @@ deleted_dir = 0
 for root, dirs, files in os.walk(dir_path, topdown=False):
     for file in files:  # delete files
         file_path = os.path.join(root, file)
-        if os.path.getmtime(file_path) < time_difference:
+        if os.path.getmtime(file_path) < time_difference.timestamp():  # convert time_difference to timestamp
             os.remove(file_path)
             deleted_files += 1
 
