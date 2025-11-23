@@ -25,10 +25,14 @@ logging.info("Initiating the program...")
 
 # calculate total file size recursively
 for root, dirs, files in os.walk(dir_path):
-    for dir in dirs:
-        full_dir_path = os.path.join(root,dir)
-        dir_size = os.path.getsize(full_dir_path)
-        total_size += dir_size
-        logging.info(f"The directory size of {full_dir_path} is {dir_size}")
+    for file in files:
+        full_path = os.path.join(root,file)
+        try:
+            file_size = os.path.getsize(full_path)
+            total_size += file_size
+            logging.info(f"File: {full_path} | Size: {file_size} bytes")
+        except Exception as e;
+            logging.error(f"Failed to calculate file size {full_path} | Error: {e}")
 
-logging.info(f"Total size of the {dir_path} is {total_size}")
+logging.info(f"Total size of the {dir_path} is {total_size}bytes")
+print(f"File size calcualtion completed. File: {full_path} | Size: {total_size}")
