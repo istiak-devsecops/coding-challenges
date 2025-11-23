@@ -31,7 +31,7 @@ for root, dirs, files in os.walk(dir_path):
             file_size = os.path.getsize(full_path)
             total_size += file_size
             logging.info(f"File: {full_path} | Size: {file_size} bytes")
-        except Exception as e;
+        except Exception as e:
             logging.error(f"Failed to calculate file size {full_path} | Error: {e}")
 
 logging.info(f"Total size of the {dir_path} is {total_size}bytes")
