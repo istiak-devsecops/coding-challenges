@@ -23,4 +23,8 @@ if not abs_path.is_dir():
     sys.exit(1) # missing directory
 
 
+# archive the directory 
 shutil.make_archive(archive_name,"zip",abs_path)
+
+
+print(f"Archive created: {archive_name}.zip")
