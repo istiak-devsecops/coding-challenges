@@ -13,13 +13,13 @@ pattern = sys.argv[2] # regex pattern
 
 regex = re.compile(pattern) # compile the pattern
 
-if not dir_path.exists() and dir_path.is_file():
+if not dir_path.exists() or not dir_path.is_file():
     print("Invalid directory.")
     sys.exit(1) # exit code missing directory
 
 
 # seach the file
 for file in dir_path.rglob("*"):
-    if file.is_file and regex.search(file.name):
+    if file.is_file() and regex.search(file.name):
         print(file)
 
