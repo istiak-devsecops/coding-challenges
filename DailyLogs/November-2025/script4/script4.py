@@ -15,7 +15,8 @@ if len(sys.argv) < 2:
     sys.exit(2) # exit code invalid arguments
 
 dir_path = Path(sys.argv[1]).resolve()  # get the absoulate path
-backup_dir = Path.mkdir("Backup-log")   # backup dir for logs
+backup_dir = Path("Backup-log")   # backup dir for logs
+backup_dir.mkdir(exist_ok=True)
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 
@@ -36,7 +37,8 @@ logging.info("Program initiating...")
 # logic to find the logs
 for log in dir_path.rglob("*.log"):
     backup_file = f"{log.stem}_{timestamp}{log.suffix}"
-    shutil.copy(log, backup_dir)
-    logging.info(f"{backup_file} moved to {backup_dir}")
+    backup_destination = backup_dir / backup_file
+    shutil.copy(log, backup_destination)
+    logging.info(f"{backup_file} copied to {backup_destination}")
 
 logging.info("Backup complete.")
