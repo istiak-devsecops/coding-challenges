@@ -4,11 +4,9 @@ import logging
 
 
 logging.basicConfig(filename="script_report.log", level=logging.DEBUG,
-                    format="%(asctime)s %(levelname)s: %(message)s",
-                    handlers=
-                    [logging.FileHandler("script_report.log"),
-                    logging.StreamHandler()])
+                    format="%(asctime)s %(levelname)s: %(message)s")
 
+# check if there is at least one arguments
 if len(sys.argv) < 2:
     logging.error("Missing Arguments...")
     print("Usage: python3 script.py <arguments>")
@@ -16,15 +14,23 @@ if len(sys.argv) < 2:
 
 dir_path = Path(sys.argv[1]).resolve() # absuloute path
 
+# check if directory exist
+if not dir_path.is_dir():
+    logging.error("Directory doesn't exist.")
+    print(f"{dir_path} is invalid...")
+    sys.exit(1) # exit code for missing file
+
 python_file_list = []
 
 logging.info("Program initiating...")
 
-for files in Path(dir_path).iterdir():
-    for file in files:
-        if file.endswith(".py"):
-            python_file_list.append(file)
-            logging.info(f"{file} added to the list.")
+# logic that filter .py files
+for item in dir_path.iterdir():
+    if item.is_file() and item.suffix == ".py":
+        python_file_list.append(item.name)
+        logging.info(f"{item.name} added to the list.")
 
 logging.info(f"File list is ready...")
-print("Here are the file list start with .py:\n",{python_file_list})
+print("Here are the file list start with .py:\n")
+for file in python_file_list:
+    print(file)
