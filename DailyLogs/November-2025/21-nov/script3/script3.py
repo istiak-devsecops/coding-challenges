@@ -6,7 +6,7 @@ if len(sys.argv) < 2:
     print("Usage: python3 script.py <command>")
     sys.exit(2) # invalid arguments
 
-shell_command = " ".join(sys.argv[1])
+shell_command = " ".join(sys.argv[1:])
 shell_command_results = subprocess.run(shell_command, capture_output=True,shell=True, text=True)
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_file = f"log_{timestamp}.txt"
