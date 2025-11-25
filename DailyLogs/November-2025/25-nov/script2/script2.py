@@ -29,3 +29,26 @@ if  len(sys.argv) == 1:
 if len(sys.argv) != 3:
     print("Usage: python3 script.py <key> <value>")
     sys.exit(1) # exit code missing arguments
+
+key = sys.argv[1]
+value = sys.argv[2]
+
+if value.lower() == "true":
+    value = True
+elif value.lower() == "false":
+    value = False
+else:
+    # Try converting numeric values
+    try:
+        value = int(value)
+    except ValueError:
+        pass  # keep string
+
+# Update the setting
+setting[key] = value
+
+# Save back to file
+with setting_path.open("w") as file:
+    json.dump(setting, file, indent=4)
+
+print(f"Updated '{key}' → {value}")
