@@ -5,7 +5,7 @@ file_name = input("File name: ")
 
 file_path = Path(root).resolve()
 
-found_files = [f for f in file_path.rglob("*") if f.name.lower() == file_name]
+found_files = list(file_path.rglob(file_name))
 
 if found_files:
     for f in found_files:
