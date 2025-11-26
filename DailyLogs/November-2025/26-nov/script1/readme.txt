@@ -1,0 +1,3 @@
+- Hello CLI
+- Create a script that accepts a single argument: --name.
+- When run, it prints:
