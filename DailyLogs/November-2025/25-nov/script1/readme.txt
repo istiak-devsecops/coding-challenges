@@ -6,3 +6,4 @@ Save Command Output to JSON
 - Capture stdout and stderr
 - Save results into a JSON file with keys: 
 {"command": ..., "stdout": ..., "stderr": ..., "timestamp": ...}
+

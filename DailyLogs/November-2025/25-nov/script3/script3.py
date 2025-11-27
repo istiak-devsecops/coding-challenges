@@ -18,7 +18,7 @@ if not file_path.exists():
 lines = []
 
 with file_path.open('r')as file:
-    for i, line in enumerate(file, start=1)
+    for i, line in enumerate(file, start=1):
         lines.append({
             "line": i,
             "content": line,
