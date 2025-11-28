@@ -16,7 +16,8 @@ def backup_dir(source, dest, compress=True):
     dst.mkdir(parents=True,exist_ok=True)
 
     # create dir name inside destination
-    backup_d = dst / src.name
+    backup_name = f"{src.name}_backup"
+    backup_d = dst / backup_name
 
     print(f"Backing up {src} to {backup_d}...")
 
@@ -28,7 +29,21 @@ def backup_dir(source, dest, compress=True):
 
     # compress if flag been used
     if compress:
-        tar_file = dst / f"{backup}.tar.gz"
+        tar_file = dst / f"{backup_name}.tar.gz"
         with tarfile.open(tar_file,"w:gx")as tar:
-            tar.add(backup_d, arcname=backup)
+            tar.add(backup_d, arcname=backup_name)
         print(f"Compress to :{tar_file}")
+
+def main():
+    parser = argparse.ArgumentParser(description="Backup a directory with optional compression.")
+    parser.add_argument("--source", required=True, help="Source directory to back up")
+    parser.add_argument("--dest", required=True, help="Destination folder to store backup")
+    parser.add_argument("--compress", action="store_true", help="Compress the backup into .tar.gz")
+
+    args = parser.parse_args()
+
+    backup_dir(args.source, args.dest, args.compress)
+
+
+if __name__ == "__main__":
+    main()       
