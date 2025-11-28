@@ -25,4 +25,10 @@ def backup_dir(source, dest, compress=True):
         shutil.rmtree(backup_d)
     shutil.copytree(src, backup_d)
 
-    
+
+    # compress if flag been used
+    if compress:
+        tar_file = dst / f"{backup}.tar.gz"
+        with tarfile.open(tar_file,"w:gx")as tar:
+            tar.add(backup_d, arcname=backup)
+        print(f"Compress to :{tar_file}")
