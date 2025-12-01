@@ -16,7 +16,7 @@ def main():
         sys.exit(1) # missing file
 
     # check if its a file
-    if not os.path.isfile()
+    if not os.path.isfile():
         print(f"{file_path} is not a file.")
         sys.exit(1) # not a file
 
