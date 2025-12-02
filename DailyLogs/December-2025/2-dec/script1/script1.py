@@ -1,0 +1,32 @@
+
+import sys
+import pathlib
+import shutil
+import platform
+import time
+
+def main():
+    if len(sys.argv) < 2:
+        print("usage: python3 script.py <filename>")
+        sys.exit(2) # invalid arguments
+    
+    dir_path = pathlib.Path(sys.argv[1]).resolve()
+
+    if not dir_path.is_dir():
+        print(f"{dir_path} is not a directory.")
+        sys.exit(1)
+    
+    if not dir_path.exists():
+        print(f"{dir_path} does not exist.")
+        sys.exit(1)
+
+    print(f"Scanning directory: {dir_path}\n")
+    print(f"Files in directory: ")
+
+    # dir list
+    for file in dir_path.iterdir():
+        print(f" - {file.name}\n")
+
+
+
+
