@@ -26,6 +26,15 @@ def main():
     # dir list
     for file in dir_path.iterdir():
         print(f" - {file.name}\n")
+        print()
+
+    # system info
+    print("System Info:")
+    print(f"Python Version: {sys.version}")
+    print(f"Platform: {platform.platform()}")
+    print()
+
+
 
 
 
