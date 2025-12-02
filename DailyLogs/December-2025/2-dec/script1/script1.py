@@ -3,7 +3,7 @@ import sys
 import pathlib
 import shutil
 import platform
-import time
+from datetime import datetime, timedelta
 
 def main():
     if len(sys.argv) < 2:
@@ -45,10 +45,19 @@ def main():
             print(f"copied: {file.name}")
     print()
 
-    
+
+    # delete temp files older than 7 days
+    print(f"cleaning temp files older than 7 days:")
+    time_differ = datetime.now() - timedelta(days=7)
 
 
+    for file in dir_path.iterdir():
+        if file.is_file() and file.suffix in [".tmp", ".temp", ".log"]:
+            print(f"Deleting old temp file: {file.name}")
+            file.unlink()
+    print("\nDone!")
 
-
+if __name__=="__main__":
+    main()
 
 
