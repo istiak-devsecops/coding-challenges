@@ -34,6 +34,19 @@ def main():
     print(f"Platform: {platform.platform()}")
     print()
 
+    # copy text file for backup
+    backup_dir  = dir_path / "backup"
+    backup_dir.mkdir(exist_ok=True, parents=True)
+
+    print("Copying .txt files to the backup/:")
+    for file in dir_path.iterdir():
+        if file.is_file() and file.suffix == ".txt":
+            shutil.copy2(file, backup_dir)
+            print(f"copied: {file.name}")
+    print()
+
+    
+
 
 
 
