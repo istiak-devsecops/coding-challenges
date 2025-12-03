@@ -1,0 +1,4 @@
+- Create a script that:
+- Reads a text file.
+- Extracts all email addresses and phone numbers using regex.
+- Saves them into a JSON file
