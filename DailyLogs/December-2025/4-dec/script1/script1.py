@@ -24,3 +24,19 @@ def list_files(directory: Path):
     for item in sorted(directory.iterdir()):
         if item.is_file():
             print(item.name)
+
+def delete_files(directory: Path, pattern: str):
+    regex = re.compile(pattern)
+
+    deleted = []
+    for file in directory.iterdir():
+        if file.is_file() and regex.search(file.name):
+            file.unlink()
+            deleted.append(file.name)
+
+    if deleted:
+        print("Deleted:")
+        for f in deleted:
+            print(f"  -", f)
+    else:
+        print("No matching files found.")
