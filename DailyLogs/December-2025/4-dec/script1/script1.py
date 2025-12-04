@@ -54,3 +54,27 @@ def backup_files(directory: Path, output: Path):
     print(f"Backup created: {archive_name}")
 
 
+def main():
+    parser = argparse.ArgumentParser(description="Simple file management tool")
+
+    parser.add_argument("--dir", default=".", help="Target directory (default: current directory)")
+    parser.add_argument("--list", action="store_true", help="List files in the directory")
+    parser.add_argument("--delete", metavar="PATTERN", help="Delete files matching regex pattern")
+    parser.add_argument("--backup", action="store_true", help="Create a backup .tar.gz archive")
+
+    args = parser.parse_args()
+
+    directory = Path(args.dir).resolve()
+
+    if args.list:
+        list_files(directory)
+
+    if args.delete:
+        delete_files(directory, args.delete)
+
+    if args.backup:
+        backup_files(directory, directory)
+
+
+if __name__ == "__main__":
+    main()
