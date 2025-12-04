@@ -40,3 +40,17 @@ def delete_files(directory: Path, pattern: str):
             print(f"  -", f)
     else:
         print("No matching files found.")
+
+
+def backup_files(directory: Path, output: Path):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    archive_name = output / f"backup_{timestamp}.tar.gz"
+
+    with tarfile.open(archive_name, "w:gz") as tar:
+        for file in directory.iterdir():
+            if file.is_file():
+                tar.add(file, arcname=file.name)
+
+    print(f"Backup created: {archive_name}")
+
+
