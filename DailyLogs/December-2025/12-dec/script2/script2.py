@@ -1,5 +1,20 @@
 import argparse
 from pathlib import Path
+import shutil
+
+def backup(source: Path, dest: Path, verbose: bool):
+    if verbose:
+        print(f"[INFO] Backing up {source} to {dest}")
+
+    # Create destination directory if missing
+    dest.mkdir(parents=True, exist_ok=True)
+
+    # Copy directory recursively
+    shutil.copytree(source, dest / source.name, dirs_exist_ok=True)
+
+    if verbose:
+        print("[INFO] Backup completed")
+
 
 def main():
     parser = argparse.ArgumentParser(description="backup script.", usage="python backup.py /var/log --dest <path> --verbose")
@@ -10,9 +25,7 @@ def main():
 
     args = parser.parse_args()
 
-    if args.verbose:
-        print(f"[DEBUG] Source: {args.source}")
-        print(f"[DEBUG] Destination: {args.dest}")
+    backup(args.source, args.dest, args.verbose)
 
 if __name__=="__main__":
     main()
