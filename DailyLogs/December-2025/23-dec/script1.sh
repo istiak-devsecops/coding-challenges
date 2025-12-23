@@ -8,6 +8,12 @@
 file_name="$1"
 missing_count=0
 
+# define colors
+red='\e[31m'
+green='\e[32m'
+reset='\e[0m'
+yellow='\e[33m'
+
 # check if there is an arguments
 if [[ -z "$file_name" ]]; then
     echo "Error: Usage:: $0 <file_name>"
@@ -28,9 +34,14 @@ fi
 
 while read -r lines; do
     if [[ -d "$lines" ]]; then
-        echo "Path: $lines"
+    echo -e "${green}[OK]$reset Path: $lines"
+        if [[ -w "$lines" ]]; then
+            continue
+        else
+        echo -e "${yellow}[WARNING]${reset} write permission!"
+        fi
     else
-        echo "Error: Path:: $lines not found!"
+    echo -e "${red}[ERROR]${reset} Path:: $lines not found!"
         ((missing_count++))
     fi
 done < "$file_name"
