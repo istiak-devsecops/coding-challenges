@@ -10,7 +10,7 @@ read -p "Enter your ip address: " ip
 
 if [[ "$user" == "$admin_user" && "$ip" == "$admin_ip" ]]; then
     echo "[ACCESS GRANTED]"
-elif [[ "$user" == "$admin_user"  "$ip" != "$admin_ip" ]]; then
+elif [[ "$user" == "$admin_user" && "$ip" != "$admin_ip" ]]; then
     echo "[SECURITY ALERT] Wrong IP for Root."
 else
     echo "ACCESS DENIED"
