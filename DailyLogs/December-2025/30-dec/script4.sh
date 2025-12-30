@@ -5,28 +5,42 @@ green="\e[32m"
 reset="\e[0m"
 
 passed=0
+warned=0
 failed=0
 
 audit_directory() {
     local path="$1"
 
-    if [[ -d "$path" ]]; then
-        local count=$(ls -1 "$path" | wc -l)
-        echo -e "${green}[SUCCESS]${reset} Directory $path found. Total items: $count"
-        return 0
-    else
-        echo -e "${red}[FAILED]${reset} Directory $path is missing or invalid."
+    # 1. First, check it exists
+    if [[ ! -d "$path" ]]; then
+        echo -e "${red}[FAILED]${reset} Directory $path is missing."
         return 1
+    fi
+
+    # 2. If it exists, count the items
+    local count=$(ls -1 "$path" | wc -l)
+
+    # 3. Use the count to decide the return code
+    if [[ $count -eq 0 ]]; then
+        echo -e "${yellow}[WARNING]${reset} $path is empty."
+        return 2
+    else
+        echo -e "${green}[SUCCESS]${reset} $path found. Items: $count"
+        return 0
     fi
 }
 
 for dir in "$@"; do
     audit_directory "$dir"
-    if [[ $? -eq 0 ]]; then
+    status=$?  # Save it immediately so we don't lose it!
+
+    if [[ $status -eq 0 ]]; then
         ((passed++))
+    elif [[ $status -eq 2 ]]; then
+        ((warned++)) 
     else
         ((failed++))
     fi
 done
 
-echo "Final Report: $passed Passed, $failed Failed."
+echo "Final Report: $passed Passed, $failed Failed., $warned Warned"
