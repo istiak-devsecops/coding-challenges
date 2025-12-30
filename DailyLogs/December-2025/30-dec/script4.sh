@@ -2,6 +2,7 @@
 
 red="\e[31m"
 green="\e[32m"
+yellow="\e[33m"
 reset="\e[0m"
 
 passed=0
@@ -18,7 +19,7 @@ audit_directory() {
     fi
 
     # 2. If it exists, count the items
-    local count=$(ls -1 "$path" | wc -l)
+    local count=$(ls -1 "$path" 2> /dev/null | wc -l)
 
     # 3. Use the count to decide the return code
     if [[ $count -eq 0 ]]; then
@@ -40,6 +41,7 @@ for dir in "$@"; do
         ((warned++)) 
     else
         ((failed++))
+        echo "$dir" >> error.log
     fi
 done
 
