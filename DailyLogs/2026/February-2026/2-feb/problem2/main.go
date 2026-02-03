@@ -27,11 +27,18 @@ func main() {
 		os.Exit(1)
 	}
 
-	hostName := os.Args[1]
+	var hostNames []string // declaring the slice
+	name := os.Args[1]
 	fmt.Println("Generating hostnames:")
 
 	// the main logic to generate hostname
 	for i := startNum; i < startNum+countNum; i++ {
-		fmt.Printf("%s-%d\n", hostName, i)
+		newName := fmt.Sprintf("%s-%d\n", name, i)
+		hostNames = append(hostNames, newName)
 	}
+
+	fmt.Printf("First hostname: %s\n", hostNames[0])
+	fmt.Printf("Last hostname: %s\n", hostNames[len(hostNames)-1])
+	fmt.Println("Hostname excluding the first: ")
+	fmt.Printf("%s", hostNames[1:])
 }
