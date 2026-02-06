@@ -5,13 +5,13 @@ import (
 	"os"
 )
 
-func checkServer(name string) (string, error) {
+func checkServer(name string) (status string, err error) {
 
-	if name == "web-server" {
+	if name == os.Args[1] {
 		return "Online", nil
 	}
 
-	return "", fmt.Errorf("server %s is missing", name)
+	return "", fmt.Errorf("%s is missing", name)
 }
 
 func main() {
@@ -20,13 +20,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	status, err := checkServer(os.Args[1]) // call the function and pass the arguments
+	//slice of severs
+	servers := []string{"web-server", "db-server", "mail-server"}
 
-	// check if there is an error
-	if err != nil {
-		fmt.Println("Error occured:", err)
-		return // Exit the function early
+	//check if the arguments matches items from slice
+	for _, ser := range servers {
+		status, err := checkServer(ser)
+		if err != nil {
+			fmt.Printf("Alert: %v\n", err)
+			continue
+		}
+		fmt.Printf("Health Check: %s is %s\n", ser, status)
 	}
-
-	fmt.Println("Status is:", status)
 }
