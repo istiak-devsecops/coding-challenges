@@ -8,6 +8,7 @@ type Resource interface {
 
 type S3Bucket struct {
 	BucketName string
+	IsLocker   bool
 }
 
 func (s S3Bucket) Delete() error {
