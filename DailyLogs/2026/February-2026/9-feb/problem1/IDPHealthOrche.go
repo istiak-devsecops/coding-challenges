@@ -46,7 +46,13 @@ func (d Database) Check() bool {
 
 // The Orchestrator(manager)
 func Reconcile(r Resource) {
-	r.Start()
+	err := r.Start()
+
+	if err != nil {
+		fmt.Printf("ERROR: %s\n", err)
+		return
+	}
+
 	if r.Check() {
 		fmt.Println("Resource is stable")
 	} else {
