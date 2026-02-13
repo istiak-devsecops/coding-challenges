@@ -8,33 +8,37 @@ import (
 	"sync"
 )
 
+// Blueprints
 type Provisioner interface {
 	Provision() string
 }
 
-type Database struct {
-	Name string
+type Database struct{ Name string }
+type Server struct{ ID int }
+
+func (d Database) Provision() string {
+	return fmt.Sprintf("Provisioning Database: %s", d.Name)
 }
 
-type Server struct {
-	ID int
+func (s Server) Provision() string {
+	return fmt.Sprintf("Provisioning Server: %d", s.ID)
 }
 
+// JSON mapping
 type ProvisionRequest struct {
 	User       string   `json:"user"`
 	Components []string `json:"components"`
 }
 
-func (d Database) Provision() string {
-	return fmt.Sprintf("Provisioning Database: %s\n", d.Name)
+type ProvisionResponse struct {
+	Status  string   `json:"status"`
+	Message string   `json:"message"`
+	Results []string `json:"results"`
 }
 
-func (s Server) Provision() string {
-	return fmt.Sprintf("Provisioning Server: %d\n", s.ID)
-}
-
+// The Handler
 func PostHandler(w http.ResponseWriter, r *http.Request) {
-
+	// Guard Method
 	if r.Method != http.MethodPost {
 		http.Error(w, "Only POST allowed", http.StatusMethodNotAllowed)
 		return
@@ -42,19 +46,16 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 
 	defer r.Body.Close()
 
-	// create an empty struct
+	// Decode Input
 	var req ProvisionRequest
-
-	// decode the r.Body and fill the empty struct value
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		http.Error(w, "Bad JSON", http.StatusBadRequest)
 		return
 	}
 
-	// provision iteams based on the request
+	// Mapping Logic
 	var items []Provisioner
-
 	// check if the user filed is empty
 	if req.User == "" {
 		http.Error(w, "Field 'user' is required", http.StatusBadRequest)
@@ -71,6 +72,7 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// Execution
 	var wg sync.WaitGroup                    // counter
 	reports := make(chan string, len(items)) // channel to stream the data
 
@@ -87,14 +89,24 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 	close(reports)
 
-	fmt.Printf("User %s wants to provision: %v\n", req.User, req.Components)
-	fmt.Fprint(w, "JSON Received!\n")
-	fmt.Fprint(w, "=== Provisioning Components ===\n")
+	// Collect Results into a slice
+	var results []string
 	for msg := range reports {
-		fmt.Fprintf(w, "Reports: %s", msg)
+		results = append(results, msg)
 	}
+
+	// Encode output as JSON
+	w.Header().Set("Content-Type", "application/json") // tell the client its a JSON
+	resp := ProvisionResponse{
+		Status:  "Success",
+		Message: fmt.Sprintf("Tasks completed for user: %s", req.User),
+		Results: results,
+	}
+
+	json.NewEncoder(w).Encode(resp)
 }
 
+// Main function
 func main() {
 	http.HandleFunc("/provision", PostHandler)
 	fmt.Println("Platform API listening on :8080...")
