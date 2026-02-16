@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"sync"
+	"time"
 )
 
 // The Logic Handler
@@ -31,15 +33,30 @@ func httpHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// TimeOut logic with context
+	ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
+	defer cancel() // Always clean up
+
 	// Factory/Mapper. Loop through the string slice from the request
 	// "convert" those strings into a slice of your Provisioner interface.
 	for _, comp := range req.Components {
-		switch comp {
-		case "database":
-			items = append(items, Database{Name: "redis"})
-		case "server":
-			items = append(items, Server{ID: 721892})
+		select {
+		case <-ctx.Done():
+			http.Error(w, "Too slow", 504)
+			return
+		default:
+			switch comp {
+			case "database":
+				items = append(items, Database{Name: "redis"})
+			case "server":
+				items = append(items, Server{ID: 721892})
+			default:
+				msg := fmt.Sprintf("Error: %v is not a supported component", comp)
+				http.Error(w, msg, http.StatusBadRequest)
+				return
+			}
 		}
+
 	}
 
 	// Concurrency Logic

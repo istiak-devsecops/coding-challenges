@@ -12,8 +12,8 @@ type Provisioner interface {
 type Database struct{ Name string }
 type Server struct{ ID int }
 
-func (d Database) Provision() string { return fmt.Sprintf("Provisioning Database: %s\n", d.Name) }
-func (s Server) Provision() string   { return fmt.Sprintf("Provisioning Server: %d\n", s.ID) }
+func (d Database) Provision() string { return fmt.Sprintf("Provisioning Database: %s", d.Name) }
+func (s Server) Provision() string   { return fmt.Sprintf("Provisioning Server: %d", s.ID) }
 
 // Data Transfer object
 type ProvisionRequest struct {
