@@ -96,6 +96,6 @@ func httpHandler(w http.ResponseWriter, r *http.Request) {
 // Main Logic
 func main() {
 	http.HandleFunc("/provision", httpHandler)
-	log.Println("Platform API listening on :8080...")
+	log.Println("Platform API listening on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
