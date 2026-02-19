@@ -24,9 +24,10 @@ func main() {
 		}(item)
 	}
 
+	// wait for all items to be provisioned
 	go func() {
 		wg.Wait()
-		close(done)
+		close(done) // close the done signal
 	}()
 
 	fmt.Println("Waiting for all items to be provisioned...")
