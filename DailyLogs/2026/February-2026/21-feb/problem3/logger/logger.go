@@ -2,11 +2,6 @@ package logger
 
 import "fmt"
 
-// Processor Interface
-type Processor interface {
-	Process() string
-}
-
 // The data stracture
 type Entry struct {
 	Source  string
