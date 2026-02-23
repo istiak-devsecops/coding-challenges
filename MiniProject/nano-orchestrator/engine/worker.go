@@ -30,7 +30,7 @@ func Deploy(names []string) map[string]string {
 	for msg := range results {
 		var sName, sStatus string
 		fmt.Sscanf(msg, "%s:%s", &sName, &sStatus)
-		finalStatus[msg] = "Processed"
+		finalStatus[sName] = sStatus
 	}
 	return finalStatus
 }
