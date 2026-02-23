@@ -2,6 +2,7 @@ package engine
 
 import (
 	"fmt"
+	"strings"
 	"sync"
 	"time"
 )
@@ -28,9 +29,10 @@ func Deploy(names []string) map[string]string {
 	}()
 
 	for msg := range results {
-		var sName, sStatus string
-		fmt.Sscanf(msg, "%s:%s", &sName, &sStatus)
-		finalStatus[sName] = sStatus
+		parts := strings.Split(msg, ":")
+		if len(parts) == 2 {
+			finalStatus[parts[0]] = parts[1]
+		}
 	}
 	return finalStatus
 }
