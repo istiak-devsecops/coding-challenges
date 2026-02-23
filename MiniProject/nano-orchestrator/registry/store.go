@@ -27,9 +27,15 @@ func (s *Store) List() map[string]string {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 
-	result := make(map[string]string)
+	result := make(map[string]string, len(s.data))
 	for k, v := range s.data {
 		result[k] = v
 	}
 	return result
+}
+
+// === Get Method ===
+func (s *Store) Get(name string) (string, bool) {
+	val, exist := s.data[name]
+	return val, exist
 }
