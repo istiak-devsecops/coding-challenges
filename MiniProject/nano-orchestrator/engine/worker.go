@@ -18,6 +18,10 @@ func Deploy(names []string) map[string]string {
 		go func(n string) {
 			defer wg.Done()
 			time.Sleep(100 * time.Millisecond)
+			if n == "" {
+				fmt.Println("[ENGINE ERROR] Skipping empty pod name.")
+				return
+			}
 			results <- fmt.Sprintf("%s: Ready", n)
 		}(name)
 	}

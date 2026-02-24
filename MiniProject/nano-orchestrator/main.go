@@ -8,7 +8,7 @@ import (
 
 func main() {
 	myStore := registry.NewStore()
-	podsToDeploy := []string{"api-server", "auth-db", "cache-node"}
+	podsToDeploy := []string{"api-server", "auth-db", "", "cache-node"}
 
 	// 3. Deploy
 	deployedPods := engine.Deploy(podsToDeploy)
