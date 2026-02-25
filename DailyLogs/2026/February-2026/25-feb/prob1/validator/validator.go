@@ -18,5 +18,22 @@ func CheckName(name string) bool {
 		return false
 	}
 	return true
+}
 
+func CheckPort(port int) bool {
+	if port < 1024 {
+		fmt.Println("standard non privileged ports.")
+		return false
+	}
+
+	if port > 65535 {
+		fmt.Println("standard non-privilaged ports.")
+		return false
+	}
+
+	if port == 8080 {
+		fmt.Println("Note: 8080 is common, ensuring non conflicts...")
+		return true
+	}
+	return true
 }

@@ -5,19 +5,28 @@ import (
 	"fmt"
 	"os"
 	"prob1/validator"
+	"strconv"
 )
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
-	fmt.Print("Enter your name to validate: ")
+	fmt.Print("Enter your name: ")
 	scanner.Scan()
-	var name string
-	name = scanner.Text()
+	name := scanner.Text()
 
-	if validator.CheckName(name) == true {
-		fmt.Printf("Name Accepted: %s", name)
-	} else {
-		fmt.Println("Access Denied")
+	fmt.Print("Enter a port: ")
+	scanner.Scan()
+	input := scanner.Text()
+	port, err := strconv.Atoi(input)
+
+	if err != nil {
+		fmt.Println("Not a valid port number.")
+		return
 	}
 
+	if validator.CheckName(name) == true && validator.CheckPort(port) == true {
+		fmt.Printf("Name %s approved | Port %d approved.", name, port)
+	} else {
+		fmt.Print("Name and port is not approved.")
+	}
 }
