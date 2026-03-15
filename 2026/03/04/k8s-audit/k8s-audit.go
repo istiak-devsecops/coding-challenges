@@ -33,23 +33,29 @@ func main() {
 		log.Fatalf("Error creating clientset: %v", err)
 	}
 
-	fmt.Println("🚀 Starting Namespace Audit...")
+	fmt.Println("Starting Namespace Audit...")
+
+	// --- TODO 1: List all Namespaces ---
+	// Hint: Use clientset.CoreV1().Namespaces().List(...)
 	namespaces, err := clientset.CoreV1().Namespaces().List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		log.Fatalf("Failed to list namespaces: %v", err)
 	}
 
 	for _, ns := range namespaces.Items {
+		// --- TODO 2: Check Deployments in this Namespace ---
+		// Hint: clientset.AppsV1().Deployments(ns.Name).List(...)
+		// Check the 'Condition' or 'CreationTimestamp' of the deployments.
 
 		isInactive := checkNamespaceInactivity(clientset, ns.Name)
 
 		if isInactive {
-			fmt.Printf("⚠️  Namespace [%s] appears inactive (No deployment updates in 30 days)\n", ns.Name)
+			fmt.Printf("Namespace [%s] appears inactive (No deployment updates in 30 days)\n", ns.Name)
 		}
 	}
 }
 
 func checkNamespaceInactivity(clientset *kubernetes.Clientset, nsName string) bool {
-
+	// Your logic goes here for the next step!
 	return false
 }
