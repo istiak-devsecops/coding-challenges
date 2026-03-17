@@ -7,12 +7,15 @@ def sanitize_metadata(raw_data: List[Dict]) -> List[str]:
         return []
     
     clean_metadata = []
+
     for data in raw_data:
-        content = data["content"]
-        content_char_list = list(content.strip())
+        content = data["content"].strip()
         if content.upper() == "IGNORE":
-            break
-        elif content_char_list > 50:
-            new_short_content = "".join(content_char_list[:47])
-            clean_metadata.append(new_short_content)
-            return clean_metadata
+            continue
+
+        if len(content) > 50:
+            new_short_content = (content[:47])
+            clean_metadata.append(new_short_content+"...")
+        else:
+            clean_metadata.append(content)
+    return clean_metadata
